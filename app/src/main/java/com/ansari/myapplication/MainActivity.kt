@@ -4,13 +4,35 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
+    lateinit var mainViewModel : MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        var clickButton = findViewById<Button>(R.id.buttonClick)
+        var counterTextView = findViewById<TextView>(R.id.textViewCounter)
+
+        clickButton.setOnClickListener {
+                mainViewModel.increment()
+            counterTextView.text = mainViewModel.count.toString()
+        }
+
+
+
+
+
+
+
 
         var filter = IntentFilter("android.provider.Telephony.SMS_RECEIVED")
         var myReceiver = MyReceiver()

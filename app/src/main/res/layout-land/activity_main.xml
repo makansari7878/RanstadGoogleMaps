@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#BF7B7B">
 
     <Button
         android:id="@+id/buttonClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="163dp"
-        android:text="Click"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="151dp"
+        android:text="CLICK"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,9 +20,10 @@
         android:id="@+id/textViewCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginTop="171dp"
+        android:layout_marginEnd="313dp"
 
-        app:layout_constraintEnd_toEndOf="@+id/buttonClick"
-        app:layout_constraintTop_toBottomOf="@+id/buttonClick" />
+        android:textColor="#0f0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
