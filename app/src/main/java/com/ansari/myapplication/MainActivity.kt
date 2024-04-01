@@ -17,14 +17,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
         var clickButton = findViewById<Button>(R.id.buttonClick)
         var counterTextView = findViewById<TextView>(R.id.textViewCounter)
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        mainViewModel.myLiveData.observe(this, {
+            counterTextView.text = it
+        })
+
 
         clickButton.setOnClickListener {
-                mainViewModel.increment()
-            counterTextView.text = mainViewModel.count.toString()
+//                mainViewModel.increment()
+//            counterTextView.text = mainViewModel.count.toString()
+
+            mainViewModel.dataChange()
         }
 
 
