@@ -10,23 +10,27 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.ansari.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var mainViewModel : MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+       // setContentView(R.layout.activity_main)
 
-        var clickButton = findViewById<Button>(R.id.buttonClick)
-        var counterTextView = findViewById<TextView>(R.id.textViewCounter)
+        var mainXml = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mainXml.root)
+
+       /* var clickButton = findViewById<Button>(R.id.buttonClick)
+        var counterTextView = findViewById<TextView>(R.id.textViewCounter)*/
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         mainViewModel.myLiveData.observe(this, {
-            counterTextView.text = it
+            mainXml.textViewCounter.text = it
         })
 
 
-        clickButton.setOnClickListener {
+       mainXml.buttonClick.setOnClickListener {
 //                mainViewModel.increment()
 //            counterTextView.text = mainViewModel.count.toString()
 
