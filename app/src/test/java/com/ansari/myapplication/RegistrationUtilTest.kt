@@ -29,7 +29,7 @@ class RegistrationUtilTest{
     fun `password repeated incorrectly returns false`() {
         val result = RegistrationUtil.validateRegistrationInput(
             "Peter",
-            "123",
+            "1234",
             "1234"
         )
         assertThat(result).isTrue()

@@ -17,12 +17,11 @@ object RegistrationUtil {
         if (userName.isEmpty() || password.isEmpty()){
             return  false
         }
-        else{
-            return true
-        }
-
         if(password != confirmPassword){
             return false
-        }else{ return  true}
+        }
+
+        return  true
     }
+
 }
