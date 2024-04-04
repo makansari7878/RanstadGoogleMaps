@@ -4,6 +4,7 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -12,8 +13,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ansari.myapplication.databinding.ActivityMainBinding
 
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
+
+
+
+
 class MainActivity : AppCompatActivity() {
     lateinit var mainViewModel : MainViewModel
+
+    val realtimeDatabase = Firebase.database
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_main)
@@ -34,7 +45,36 @@ class MainActivity : AppCompatActivity() {
 //                mainViewModel.increment()
 //            counterTextView.text = mainViewModel.count.toString()
 
-            mainViewModel.dataChange()
+           // mainViewModel.dataChange()
+
+
+           // Retrieving the FCM token
+           FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+               if (!task.isSuccessful) {
+                   mainXml.textViewCounter.text = "Fetching FCM registration token failed"
+                   return@OnCompleteListener
+               }
+
+               // fetching the token
+               val token = task.result
+
+               mainXml.textViewCounter.text = "Token saved successfully!"
+
+               // directory reference
+               val tokenDirRef = realtimeDatabase.getReference("Tokens")
+
+               // storing the value
+               tokenDirRef.setValue(token.toString())
+
+               // toast to show  message
+               Toast.makeText(
+                   baseContext,
+                   "Firebase Generated Successfully and saved to realtime database $token",
+                   Toast.LENGTH_LONG
+               ).show()
+
+               Log.i("mytag", "$token")
+           })
         }
 
 
